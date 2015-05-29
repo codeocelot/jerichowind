@@ -8,13 +8,16 @@ var moment = require('moment');
 moment().format();
 var mongoURL = 'mongodb://localhost:27017/wind';
 
-//app.get('/data',function(req,res){
-//		var container = {};
-//		container.speeds = windSpeeds;
-//		container.times = times;
-//		console.log(container);
-//		res.json(container);
-//		})
+app.get('/data',function(req,res){
+		MongoClient.connect(mongoURL,function(err,db){
+			getRecords(db,function(err,data){
+				// var data = recs.toArray();
+				console.log(data)
+				res.json(data);
+			})
+		})
+		// res.json(container);
+		})
 
 var server = app.listen(3000,function(){
 	var host = server.address().address;
@@ -47,7 +50,7 @@ function getWind(){
 			)}
 		})};
 
-new CronJob('* * * * * *', function() {
+new CronJob('0 */5 * * * *', function() {
 		console.log('cron job fired at: ', new Date().toString())
 		getWind();
 	}, null, true, 'America/Vancouver');
@@ -68,3 +71,11 @@ var upsertRecord = function(id,rec,db,callback){
 		}
 		)
 };
+
+var getRecords = function(db,callback){
+	var collection = db.collection('jericho');
+	collection.find({},function(err,recs){
+		recs.toArray(callback)
+		// callback(err,recs);
+	})
+}
