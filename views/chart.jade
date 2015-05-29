@@ -25,19 +25,15 @@ html(lang="en")
 
 		script(type='text/javascript').
 			$.get('//localhost:3000/data',function(data){
+				var winds = {key:"Wind Speed (kts):",values:[]}
+				var temps = {key:"Temperature (C):",values:[]}
 				data.forEach(function(el,i){
 
-					el.x = +el._id
-					el.y = +el.speed;
-					if(i> 50 && i < 100)
-						console.log(el.x," ",el.y)
+					winds.values.push({x:+el._id,y:+el.speed});
+					temps.values.push({x:+el._id,y:+el.temp});
 				})
-				var wind = {};
-				wind.values = data;
-				wind.key = 'Wind Speed (kts):';
-				// wind.color = 'blue';
-				arr = [wind]
-				makeLineChart(arr);
+				
+				makeLineChart([winds,temps]);
 			})
 
 			function makeLineChart(data){
@@ -54,7 +50,7 @@ html(lang="en")
 				    ;
 
 				    chart.yAxis
-				    .axisLabel('Wind Speed (kts)')
+				    //.axisLabel('Wind Speed (kts)')
 				    //.tickFormat(d3.format('.02f'))
 				    ;
 

@@ -33,7 +33,7 @@ app.get('/data',function(req,res){
 	})
 })
 
-var server = app.listen(3000,function(){
+var server = app.listen(3010,function(){
 	var host = server.address().address;
 	var port = server.address().port;
 	console.log("Listening at http://%s:%s",host,port);
@@ -67,7 +67,7 @@ function getWind(){
 			)}
 		})};
 
-new CronJob('* */5 * * * *', function() {
+new CronJob('0 */5 * * * *', function() {
 		console.log('cron job fired at: ', new Date().toString())
 		getWind();
 	}, null, true, 'America/Vancouver');
