@@ -55,7 +55,7 @@ function getWind(){
 					var d = s.split(' ');
 					if(d[0]){
 						var t = moment(d[0] + d[1], 'DD-MM-YYh:mma')
-						upsertRecord({_id:t.format('X')},{$set:{speed:d[7],maxSpeed:d[10],direction:d[8],maxDirection:d[11],bar:d[15],rain:d[16],rainRate:d[17],temp:d[3]}},db,function(){
+						upsertRecord({_id:t.format('x')},{$set:{speed:d[7],maxSpeed:d[10],direction:d[8],maxDirection:d[11],bar:d[15],rain:d[16],rainRate:d[17],temp:d[3]}},db,function(){
 							if(i === vals.length) {
 								db.close();
 							}
@@ -67,7 +67,7 @@ function getWind(){
 			)}
 		})};
 
-new CronJob('0 */5 * * * *', function() {
+new CronJob('* */5 * * * *', function() {
 		console.log('cron job fired at: ', new Date().toString())
 		getWind();
 	}, null, true, 'America/Vancouver');
@@ -91,7 +91,7 @@ var upsertRecord = function(id,rec,db,callback){
 
 var getRecords = function(db,callback){
 	var collection = db.collection('jericho');
-	collection.find({},function(err,recs){
+	collection.find({},{sort:{_id:1}},function(err,recs){
 		recs.toArray(callback)
 	})
 }
