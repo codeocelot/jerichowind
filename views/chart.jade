@@ -1,0 +1,74 @@
+doctype html
+html(lang="en")
+	head
+		//todo: load dc,d3,crossfilter,colorbrewer
+		//link(href="bower_components/dc/dc.css")
+
+		link(href="/bower_components/nvd3/build/nv.d3.css" rel='stylesheet' type='text/css')
+
+
+		style.
+			#chart svg{
+				height:500px;
+				width:900px;
+			}
+
+	body
+		// speed vs time
+		#chart
+			svg
+
+		script(src="/bower_components/jquery/dist/jquery.js")
+		script(src="/bower_components/d3/d3.js")
+		// script(src="/bower_components/crossfilter/crossfilter.js")
+		script(src="/bower_components/nvd3/build/nv.d3.js")
+
+		script(type='text/javascript').
+			$.get('//localhost:3000/data',function(data){
+				data.forEach(function(el,i){
+
+					el.x = +el._id
+					el.y = +el.speed;
+					if(i> 50 && i < 100)
+						console.log(el.x," ",el.y)
+				})
+				var wind = {};
+				wind.values = data;
+				wind.key = 'Wind Speed (kts):';
+				// wind.color = 'blue';
+				arr = [wind]
+				makeLineChart(arr);
+			})
+
+			function makeLineChart(data){
+				nv.addGraph(function() {
+					var chart = nv.models.lineChart()
+					.useInteractiveGuideline(true)
+					.forceY([0,20])
+					;
+
+					chart.xAxis
+					.axisLabel('Time')
+					.tickFormat(function(d) { return d3.time.format("%a %I:%M %p")(new Date(d)) });
+				    //.tickFormat(d3.format(',r'))
+				    ;
+
+				    chart.yAxis
+				    .axisLabel('Wind Speed (kts)')
+				    //.tickFormat(d3.format('.02f'))
+				    ;
+
+				    d3.select('#chart svg')
+				    .datum(data)
+				    .transition().duration(500)
+				    .call(chart)
+				    ;
+
+				    nv.utils.windowResize(chart.update);
+
+				    return chart;
+				});
+
+			}
+
+		
