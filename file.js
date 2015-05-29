@@ -8,22 +8,40 @@ var moment = require('moment');
 moment().format();
 var mongoURL = 'mongodb://localhost:27017/wind';
 
+// app.use(function(req,res){
+// 	console.log('in use')
+// 	res.setHeader("Access-Control-Allow-Origin","*")
+// })
+
+app.set('views',__dirname)
+
+app.set('view engine','jade');
+app.use('/bower_components',express.static(__dirname + '/bower_components'));
+
+app.get('/*',function(req,res,next){
+	res.setHeader("Access-Control-Allow-Origin","*");
+	next();
+})
+
 app.get('/data',function(req,res){
-		MongoClient.connect(mongoURL,function(err,db){
-			getRecords(db,function(err,data){
-				// var data = recs.toArray();
-				console.log(data)
-				res.json(data);
-			})
+	console.log('in data')
+	MongoClient.connect(mongoURL,function(err,db){
+		getRecords(db,function(err,data){
+			console.log(data)
+			res.json(data);
 		})
-		// res.json(container);
-		})
+	})
+})
 
 var server = app.listen(3000,function(){
 	var host = server.address().address;
 	var port = server.address().port;
 	console.log("Listening at http://%s:%s",host,port);
 })
+
+app.get('/chart',function(req,res){
+	res.render('views/chart');
+});
 
 function getWind(){
 	request('http://jsca.bc.ca/main/downld02.txt',function(error,response,data){
@@ -39,7 +57,6 @@ function getWind(){
 						var t = moment(d[0] + d[1], 'DD-MM-YYh:mma')
 						upsertRecord({_id:t.format('X')},{$set:{speed:d[7],maxSpeed:d[10],direction:d[8],maxDirection:d[11],bar:d[15],rain:d[16],rainRate:d[17],temp:d[3]}},db,function(){
 							if(i === vals.length) {
-								console.log('closing');
 								db.close();
 							}
 						});
@@ -76,6 +93,5 @@ var getRecords = function(db,callback){
 	var collection = db.collection('jericho');
 	collection.find({},function(err,recs){
 		recs.toArray(callback)
-		// callback(err,recs);
 	})
 }

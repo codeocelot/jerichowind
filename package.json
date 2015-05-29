@@ -6,10 +6,12 @@
   "dependencies": {
     "JSONStream": "^1.0.4",
     "cron": "^1.0.9",
-    "express": "^4.12.4",
     "csv-streamify": "^2.0.0",
-    "mongodb": "^2.0.33",
+    "express": "^4.12.4",
+    "html": "0.0.10",
+    "jade": "^1.10.0",
     "moment": "^2.10.3",
+    "mongodb": "^2.0.33",
     "request": "^2.56.0"
   },
   "devDependencies": {},
