@@ -2,93 +2,31 @@
 1 verbose cli [ '/usr/local/bin/node',
 1 verbose cli   '/usr/local/bin/npm',
 1 verbose cli   'install',
-1 verbose cli   'cronjob' ]
+1 verbose cli   '--save',
+1 verbose cli   'cron' ]
 2 info using npm@2.0.0
 3 info using node@v0.11.14
-4 verbose cache add [ 'cronjob', null ]
-5 verbose cache add spec="cronjob" args=["cronjob",null]
-6 verbose parsed spec { raw: 'cronjob',
-6 verbose parsed spec   scope: null,
-6 verbose parsed spec   name: 'cronjob',
-6 verbose parsed spec   rawSpec: '',
-6 verbose parsed spec   spec: '*',
-6 verbose parsed spec   type: 'range' }
-7 verbose parsed spec { raw: 'cronjob',
-7 verbose parsed spec   scope: null,
-7 verbose parsed spec   name: 'cronjob',
-7 verbose parsed spec   rawSpec: '',
-7 verbose parsed spec   spec: '*',
-7 verbose parsed spec   type: 'range' }
-8 verbose addNamed [ 'cronjob', '*' ]
-9 verbose addNamed [ null, '*' ]
-10 silly lockFile 610776a7-cronjob cronjob@*
-11 verbose lock cronjob@* /home/jrg/.npm/610776a7-cronjob.lock
-12 silly addNameRange { name: 'cronjob', range: '*', hasData: false }
-13 verbose mapToRegistry name cronjob
-14 verbose mapToRegistry uri https://registry.npmjs.org/cronjob
-15 verbose request on initialization, where is /cronjob
-16 verbose request after pass 1, where is /cronjob
-17 verbose request url raw /cronjob
-18 verbose request resolving registry [ 'https://registry.npmjs.org/', './cronjob' ]
-19 verbose request after pass 2, where is https://registry.npmjs.org/cronjob
-20 verbose request no auth needed
-21 info attempt registry request try #1 at 16:36:57
-22 verbose request id 966639962e708601
-23 http request GET https://registry.npmjs.org/cronjob
-24 http 404 https://registry.npmjs.org/cronjob
-25 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
-25 verbose headers   'content-type': 'application/json',
-25 verbose headers   'cache-control': 'max-age=0',
-25 verbose headers   'content-length': '51',
-25 verbose headers   'accept-ranges': 'bytes',
-25 verbose headers   date: 'Thu, 28 May 2015 23:36:57 GMT',
-25 verbose headers   via: '1.1 varnish',
-25 verbose headers   age: '0',
-25 verbose headers   connection: 'close',
-25 verbose headers   'x-served-by': 'cache-lax1423-LAX',
-25 verbose headers   'x-cache': 'MISS',
-25 verbose headers   'x-cache-hits': '0',
-25 verbose headers   'x-timer': 'S1432856217.346974,VS0,VE196' }
-26 silly registry.get cb [ 404,
-26 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
-26 silly registry.get     'content-type': 'application/json',
-26 silly registry.get     'cache-control': 'max-age=0',
-26 silly registry.get     'content-length': '51',
-26 silly registry.get     'accept-ranges': 'bytes',
-26 silly registry.get     date: 'Thu, 28 May 2015 23:36:57 GMT',
-26 silly registry.get     via: '1.1 varnish',
-26 silly registry.get     age: '0',
-26 silly registry.get     connection: 'close',
-26 silly registry.get     'x-served-by': 'cache-lax1423-LAX',
-26 silly registry.get     'x-cache': 'MISS',
-26 silly registry.get     'x-cache-hits': '0',
-26 silly registry.get     'x-timer': 'S1432856217.346974,VS0,VE196' } ]
-27 silly lockFile 610776a7-cronjob cronjob@*
-28 silly lockFile 610776a7-cronjob cronjob@*
-29 verbose stack Error: 404 Not Found: cronjob
-29 verbose stack     at RegClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:259:14)
-29 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:198:65)
-29 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:236:22)
-29 verbose stack     at Request.emit (events.js:110:17)
-29 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1142:14)
-29 verbose stack     at Request.emit (events.js:129:20)
-29 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1096:12)
-29 verbose stack     at IncomingMessage.emit (events.js:129:20)
-29 verbose stack     at _stream_readable.js:907:16
-29 verbose stack     at process._tickCallback (node.js:372:11)
-30 verbose statusCode 404
-31 verbose pkgid cronjob
-32 verbose cwd /home/jrg/Wind
-33 error Linux 3.13.0-37-generic
-34 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "cronjob"
-35 error node v0.11.14
-36 error npm  v2.0.0
-37 error code E404
-38 error 404 Not Found: cronjob
-38 error 404
-38 error 404 'cronjob' is not in the npm registry.
-38 error 404 You should bug the author to publish it (or use the name yourself!)
-38 error 404
-38 error 404 Note that you can also install from a
-38 error 404 tarball, folder, http url, or git url.
-39 verbose exit [ 1, true ]
+4 verbose stack Error: Failed to parse json
+4 verbose stack Unexpected end of input
+4 verbose stack     at parseError (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:378:25)
+4 verbose stack     at parseJson (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:85:51)
+4 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:59:33
+4 verbose stack     at evalmachine.<anonymous>:295:14
+4 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:102:5
+4 verbose stack     at Object.oncomplete (evalmachine.<anonymous>:93:15)
+5 verbose cwd /home/jrg/Wind
+6 error Linux 3.13.0-37-generic
+7 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "--save" "cron"
+8 error node v0.11.14
+9 error npm  v2.0.0
+10 error file /home/jrg/Wind/package.json
+11 error code EJSONPARSE
+12 error Failed to parse json
+12 error Unexpected end of input
+13 error File: /home/jrg/Wind/package.json
+14 error Failed to parse package.json data.
+14 error package.json must be actual JSON, not just JavaScript.
+14 error
+14 error This is not a bug in npm.
+14 error Tell the package author to fix their package.json file. JSON.parse
+15 verbose exit [ 1, true ]

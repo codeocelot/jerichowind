@@ -1,0 +1,29 @@
+{
+  "name": "Wind",
+  "version": "1.0.0",
+  "description": "A project to scrape and present weather data at Jerico Sailing Centre",
+  "main": "file.js",
+  "dependencies": {
+    "JSONStream": "^1.0.4",
+    "cron": "^1.0.9",
+    "express": "^4.12.4",
+    "csv-streamify": "^2.0.0",
+    "mongodb": "^2.0.33",
+    "moment": "^2.10.3",
+    "request": "^2.56.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codeocelot/jerichowind.git"
+  },
+  "author": "codeocelot",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codeocelot/jerichowind/issues"
+  },
+  "homepage": "https://github.com/codeocelot/jerichowind"
+}
