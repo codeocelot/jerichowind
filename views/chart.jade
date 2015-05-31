@@ -22,9 +22,10 @@ html(lang="en")
 		script(src="/bower_components/d3/d3.js")
 		// script(src="/bower_components/crossfilter/crossfilter.js")
 		script(src="/bower_components/nvd3/build/nv.d3.js")
+		script(src="/bower_components/smooth/smooth.js")
 
 		script(type='text/javascript').
-			$.get('//localhost:3000/data',function(data){
+			$.get('//localhost:3010/data',function(data){
 				var winds = {key:"Wind Speed (kts):",values:[]}
 				var temps = {key:"Temperature (C):",values:[]}
 				data.forEach(function(el,i){
