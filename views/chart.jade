@@ -39,8 +39,8 @@ html(lang="en")
 
 			function makeLineChart(data){
 				nv.addGraph(function() {
-					var chart = nv.models.lineChart()
-					.useInteractiveGuideline(true)
+					var chart = nv.models.lineWithFocusChart()
+					// .useInteractiveGuideline(true)
 					.forceY([0,20])
 					;
 

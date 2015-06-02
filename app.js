@@ -6,7 +6,7 @@ var CronJob = require('cron').CronJob;
 var MongoClient = require('mongodb').MongoClient
 var moment = require('moment');
 moment().format();
-var mongoURL = 'mongodb://localhost:27017/wind';
+var mongoURL = 'mongodb://heroku_app37356478:314jhvikq49o3uv60c1lo8bvfd@ds043062.mongolab.com:43062/heroku_app37356478';
 
 // app.use(function(req,res){
 // 	console.log('in use')
@@ -48,13 +48,17 @@ function getWind(){
 		if(!error && response.statusCode === 200){
 			// windSpeeds = [];
 			//times = [];
-			var vals = data.match(/\n\d\d\/\d\d\/\d\d(.)*/g)
+			var vals = data.match(/\n[\s|\d]\d\/[\s|\d]\d\/[\s|\d]\d(.)*/g)
+			console.log('vals: ',vals);
 			MongoClient.connect(mongoURL,function(err,db){
 				vals.forEach(function(el,i){
 					var s = el.replace(/ +/g,' ').replace('\n','');
+					while(s.charAt(0) == (" ") ){s = s.substring(1);}
 					var d = s.split(' ');
+					console.log(d);
 					if(d[0]){
 						var t = moment(d[0] + d[1], 'DD-MM-YYh:mma')
+//						console.log(t.toString());
 						upsertRecord({_id:t.format('x')},{$set:{speed:d[7],maxSpeed:d[10],direction:d[8],maxDirection:d[11],bar:d[15],rain:d[16],rainRate:d[17],temp:d[3]}},db,function(){
 							if(i === vals.length) {
 								db.close();
