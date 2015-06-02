@@ -25,13 +25,13 @@ html(lang="en")
 		script(src="/bower_components/smooth/smooth.js")
 
 		script(type='text/javascript').
-			$.get('//jericho-wind.herokuapp.com/data',function(data){
+			$.get('data',function(data){
 				var winds = {key:"Wind Speed (kts):",values:[]}
 				var temps = {key:"Temperature (C):",values:[]}
 				data.forEach(function(el,i){
 
-					winds.values.push({x:+el._id,y:+el.speed});
-					temps.values.push({x:+el._id,y:+el.temp});
+					winds.values.push({x:new Date(+el._id),y:+el.speed});
+					temps.values.push({x:new Date(+el._id),y:+el.temp});
 				})
 				
 				makeLineChart([winds,temps]);
@@ -45,15 +45,21 @@ html(lang="en")
 					;
 
 					chart.xAxis
-					.axisLabel('Time')
+					// .axisLabel('Time')
 					.tickFormat(function(d) { return d3.time.format("%a %I:%M %p")(new Date(d)) });
 				    //.tickFormat(d3.format(',r'))
-				    ;
+				    
+
+				    chart.x2Axis
+				    .axisLabel('Time')
+				    .tickFormat(function(d) { return d3.time.format("%a %I:%M %p")(new Date(d)) });
 
 				    chart.yAxis
 				    //.axisLabel('Wind Speed (kts)')
 				    //.tickFormat(d3.format('.02f'))
 				    ;
+
+
 
 				    d3.select('#chart svg')
 				    .datum(data)
